@@ -141,28 +141,6 @@ def calcular_correlacion(df, variable1, variable2, tipo='num'):
 corr_hour_fatals, p_value_hour_fatals = calcular_correlacion(df_f, 'HOUR', 'FATALS', 'num')
 print(f"Correlación entre HOUR y FATALS: {corr_hour_fatals:.2f}, p-value: {p_value_hour_fatals:.4f}")
 
-
-
-# =========================
-# Clusterización usando KMeans
-# =========================
-
-# Selección de características para la clusterización
-features = df_f[['HOUR', 'VE_TOTAL', 'FATALS']]
-
-# Escalado de características
-scaler = StandardScaler()
-scaled_features = scaler.fit_transform(features.dropna())
-
-# Aplicación de KMeans con 4 clusters (ajustar según necesidades)
-kmeans = KMeans(n_clusters=4, random_state=42)
-df_f['cluster'] = kmeans.fit_predict(scaled_features)
-
-# Visualización de los clusters formados
-sns.scatterplot(data=df_f, x='HOUR', y='VE_TOTAL', hue='cluster', palette='Set2')
-plt.title("Clusterización de accidentes basada en hora y número de vehículos")
-plt.show()
-
 # =========================
 # Modelado predictivo con Random Forest
 # =========================
